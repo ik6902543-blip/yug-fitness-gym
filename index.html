@@ -1,49 +1,200 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101713"><title>Yug Fitness Gym</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<title>Yug Fitness Gym</title>
 <style>
-:root{--bg:#101713;--panel:#1a2821;--panel2:#22332b;--green:#79df9c;--text:#eff7f1;--muted:#a8b9ae;--border:#2c4035;--red:#e58c8c;--yellow:#e5c879}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}header{padding:18px 16px;background:#111a15;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:3}h1{font-size:21px;margin:0}header p{margin:4px 0 0;color:var(--muted)}main{max-width:900px;margin:auto;padding:14px}.tabs{display:flex;gap:8px;margin:10px 0 15px}.tab,button{border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:13px;padding:11px 14px;font-weight:650;cursor:pointer}.tab{flex:1}.tab.active,button.primary{background:var(--green);color:#102018;border-color:transparent}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat,.panel,.member{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}.stat small,.muted{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:4px}.panel h2{font-size:18px;margin:0 0 14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;color:var(--muted);display:block}input,select,textarea{display:block;width:100%;margin-top:6px;background:#0f1712;color:var(--text);border:1px solid var(--border);padding:12px;border-radius:12px;font:inherit}button{margin:5px 4px 0 0}button.danger{background:#553038;border-color:#68404a}button.soft{background:#20332a}button.small{padding:8px 10px;font-size:13px}.row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.badge{display:inline-block;padding:5px 10px;border-radius:20px;background:#244633;color:#a7f1bd;font-size:12px}.badge.due{background:#4a3d24;color:#f1d994}.badge.expired{background:#503037;color:#f2b5bc}.member h3{margin:0 0 5px}.actions{display:flex;flex-wrap:wrap;margin-top:10px}.hide{display:none}.notice{background:#26362b;padding:12px;border-radius:12px;color:var(--muted);font-size:13px}.empty{text-align:center;padding:20px;color:var(--muted)}.subhead{font-weight:700;margin:18px 0 10px}footer{text-align:center;color:var(--muted);font-size:12px;padding:22px}.wide{width:100%}@media(max-width:520px){.formgrid{grid-template-columns:1fr}.grid{gap:8px}.stat{padding:12px}.stat strong{font-size:24px}.panel{padding:14px}}
-</style><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes"></head><body>
-<header><div class="row"><div><h1>🏋️ YUG FITNESS GYM</h1><p>Owner management • Membership • Fees</p></div><button class="small" onclick="exportData()">Backup</button></div></header>
+:root{--bg:#0b1117;--panel:#151f29;--panel2:#1c2935;--text:#f4f7fa;--muted:#a9b7c5;--accent:#f4b400;--line:#2d3b48;--good:#37c978;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101b26,#080d12);color:var(--text);font:16px system-ui,Arial,sans-serif;min-height:100vh}
+header{padding:22px 16px 12px;max-width:1000px;margin:auto}h1{margin:0;font-size:26px}header p{margin:6px 0;color:var(--muted)}
+main{max-width:1000px;margin:auto;padding:12px 16px 40px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 8px 24px #0003}
+h2{font-size:20px;margin:0 0 14px}h3{font-size:17px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:block;color:var(--muted);font-size:13px;margin:10px 0 5px}
+input,button{font:inherit}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#0d151d;color:var(--text)}
+button{border:0;border-radius:10px;padding:12px 16px;background:var(--accent);color:#171717;font-weight:700;cursor:pointer;margin:8px 6px 0 0}
+button.secondary{background:#2b3a48;color:var(--text)}button.danger{background:#8e3030;color:white}
+.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}.notice{padding:12px;border-radius:10px;background:#263746;color:#e8f3fc;margin:10px 0}
+.error{color:#ff9b9b}.success{color:#8df0b5}.stat{font-size:24px;font-weight:800}.pill{display:inline-block;border-radius:30px;padding:4px 10px;background:#2c3b48;font-size:12px}
+.member{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:var(--panel2)}
+.member p{margin:5px 0;color:var(--muted);font-size:14px}.member strong{color:var(--text)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏋️ Yug Fitness Gym</h1>
+  <p>Owner & Member Portal</p>
+</header>
 <main>
-<div class="tabs"><button class="tab active" id="ownTab" onclick="switchTab('owner')">Owner</button><button class="tab" id="memTab" onclick="switchTab('member')">Member lookup</button></div>
-<section id="owner">
-<div class="grid"><div class="stat"><small>Total members</small><strong id="total">0</strong></div><div class="stat"><small>Active</small><strong id="active">0</strong></div><div class="stat"><small>Due / expired</small><strong id="due">0</strong></div><div class="stat"><small>Month recorded</small><strong id="collection">₹0</strong></div></div>
-<div class="panel"><h2>Add member</h2><form id="addForm"><div class="formgrid">
-<label>Full name<input id="name" required placeholder="Member name"></label><label>Phone<input id="phone" required inputmode="tel" placeholder="Mobile number"></label>
-<label>Monthly fee (₹)<input id="fee" type="number" min="0" value="1000" required></label><label>Start date<input id="start" type="date" required></label>
-<label>Plan duration<select id="duration"><option value="1">1 month</option><option value="3">3 months</option><option value="6">6 months</option><option value="12">12 months</option></select></label>
-<label>Notes (optional)<input id="notes" placeholder="e.g. morning batch"></label></div><button class="primary" type="submit">Add member</button></form></div>
-<div class="panel"><div class="row"><h2>Members & fees</h2><input id="search" style="max-width:210px" placeholder="Search name / phone" oninput="render()"></div><div id="members"></div></div>
-<div class="panel"><h2>Gym UPI setup</h2><label>UPI ID<input id="upi" placeholder="yourgym@upi"></label><label>Payment note<input id="upinote" value="Yug Fitness Gym fees"></label><button onclick="saveUPI()">Save UPI settings</button><div id="qr"></div><div class="notice" style="margin-top:12px">UPI payments need internet. This app cannot verify payments automatically—owner must confirm receipt. QR is generated from your UPI ID.</div></div>
-<div class="panel"><h2>Backup & restore</h2><p class="muted">Download a JSON backup of your local member and payment records. Keep it safe.</p><button class="primary" onclick="exportData()">Download backup</button><label style="margin-top:14px">Restore backup JSON<input type="file" id="restoreFile" accept=".json,application/json" onchange="restoreData(event)"></label></div>
-</section>
-<section id="member" class="hide"><div class="panel"><h2>Member lookup</h2><label>Search member phone number<input id="lookupPhone" inputmode="tel" placeholder="Enter phone number" oninput="lookup()"></label><div id="lookupResult" class="empty">Enter a member's phone number to view membership details.</div></div><div class="notice">This lookup is on this device only. A shared online member portal requires a cloud backend.</div></section>
-<footer>Yug Fitness Gym • Local-device app • Back up records regularly</footer></main>
-<script>
-const KEY='yugfit_owner_v1', UKEY='yugfit_upi_v1';let db=JSON.parse(localStorage.getItem(KEY)||'[]'),upi=localStorage.getItem(UKEY)||'',note='Yug Fitness Gym fees';
-function persist(){localStorage.setItem(KEY,JSON.stringify(db));render()}
-function dateISO(){return new Date().toISOString().slice(0,10)}
-function addMonths(date,n){let d=new Date(date+'T12:00:00');let day=d.getDate();d.setMonth(d.getMonth()+n);if(d.getDate()<day)d.setDate(0);return d.toISOString().slice(0,10)}
-function fmt(s){return s?new Date(s+'T12:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):''}
-function status(m){let end=m.expiry; if(end<dateISO())return 'Expired'; if(end<=addMonths(dateISO(),0))return 'Due'; return 'Active'}
-function render(){let q=(document.getElementById('search')?.value||'').toLowerCase();let filtered=db.filter(m=>(m.name+' '+m.phone).toLowerCase().includes(q));document.getElementById('total').textContent=db.length;document.getElementById('active').textContent=db.filter(m=>status(m)==='Active').length;document.getElementById('due').textContent=db.filter(m=>status(m)!=='Active').length;let month=dateISO().slice(0,7);let total=db.flatMap(m=>m.payments||[]).filter(p=>p.date.slice(0,7)===month).reduce((a,p)=>a+Number(p.amount||0),0);document.getElementById('collection').textContent='₹'+total.toLocaleString('en-IN');
-let el=document.getElementById('members');if(!filtered.length){el.innerHTML='<div class="empty">No members yet. Add a member above.</div>';return}el.innerHTML=filtered.map(m=>`<div class="member"><div class="row"><div><h3>${esc(m.name)}</h3><div class="muted">${esc(m.phone)} • ₹${Number(m.fee).toLocaleString('en-IN')}/month</div><div class="muted">Expiry: ${fmt(m.expiry)}</div></div><span class="badge ${status(m)==='Active'?'':status(m)==='Due'?'due':'expired'}">${status(m)}</span></div><div class="actions"><button class="primary small" onclick="recordFee('${m.id}')">Record fee</button><button class="small" onclick="remind('${m.id}')">WhatsApp reminder</button><button class="small" onclick="showQR('${m.id}')">Payment QR</button><button class="small soft" onclick="history('${m.id}')">History</button><button class="small danger" onclick="removeMember('${m.id}')">Remove</button></div><div class="muted" style="margin-top:8px">Payments: ${(m.payments||[]).length}</div></div>`).join('')}
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-document.getElementById('start').value=dateISO();
-document.getElementById('addForm').addEventListener('submit',e=>{e.preventDefault();let m={id:Date.now().toString(),name:document.getElementById('name').value.trim(),phone:document.getElementById('phone').value.trim(),fee:Number(document.getElementById('fee').value),start:document.getElementById('start').value,expiry:addMonths(document.getElementById('start').value,Number(document.getElementById('duration').value)),notes:document.getElementById('notes').value,payments:[]};if(!m.name||!m.phone)return;db.unshift(m);persist();e.target.reset();document.getElementById('fee').value=1000;document.getElementById('start').value=dateISO();alert('Member added!')});
-function recordFee(id){let m=db.find(x=>x.id===id);if(!m)return;let amt=prompt('Amount received (₹):',m.fee);if(amt===null||!Number(amt)||Number(amt)<=0)return;let paidDate=dateISO();m.payments=m.payments||[];m.payments.push({amount:Number(amt),date:paidDate,method:'Cash/UPI (owner-confirmed)'});m.expiry=addMonths(m.expiry<paidDate?paidDate:m.expiry,1);persist();alert('Payment recorded. Membership expiry extended by 1 month.')}
-function remind(id){let m=db.find(x=>x.id===id);let msg=`Hi ${m.name}, your membership at Yug Fitness Gym is due/renewal reminder. Monthly fee ₹${m.fee}. Please contact the gym to renew. Thank you!`;window.open('https://wa.me/91'+m.phone.replace(/\\D/g,'')+'?text='+encodeURIComponent(msg),'_blank')}
-function showQR(id){let m=db.find(x=>x.id===id);if(!upi){alert('Please save gym UPI ID in QR setup first.');return}let link='upi://pay?pa='+encodeURIComponent(upi)+'&pn='+encodeURIComponent('Yug Fitness Gym')+'&am='+encodeURIComponent(m.fee)+'&cu=INR&tn='+encodeURIComponent('Membership '+m.name);let box=document.getElementById('qr');box.innerHTML=`<div class="panel"><h3>QR for ${esc(m.name)} — ₹${m.fee}</h3><img style="width:220px;max-width:100%;background:white;padding:10px;border-radius:12px" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(link)}" alt="UPI QR"><p class="muted">QR creation requires internet. Confirm payment in your UPI app/bank before recording it.</p></div>`;box.scrollIntoView({behavior:'smooth'})}
-function history(id){let m=db.find(x=>x.id===id);let list=(m.payments||[]).map(p=>`${fmt(p.date)} — ₹${p.amount} (${p.method||'recorded'})`).join('\\n');alert('Payment history — '+m.name+'\\n\\n'+(list||'No payments recorded yet.'))}
-function removeMember(id){if(confirm('Remove this member and their local payment history?')){db=db.filter(x=>x.id!==id);persist()}}
-function saveUPI(){upi=document.getElementById('upi').value.trim();note=document.getElementById('upinote').value.trim();localStorage.setItem(UKEY,upi);localStorage.setItem('yugfit_note',note);if(upi)alert('UPI settings saved on this device.');}
-document.getElementById('upi').value=upi;document.getElementById('upinote').value=localStorage.getItem('yugfit_note')||note;
-function exportData(){let payload={app:'Yug Fitness Gym',exportedAt:new Date().toISOString(),members:db,upi,note};let blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='YugFitnessGym_Backup_'+dateISO()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function restoreData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.members))throw Error('Invalid backup');db=x.members;upi=x.upi||'';localStorage.setItem(UKEY,upi);persist();document.getElementById('upi').value=upi;alert('Backup restored')}catch(err){alert('Backup file not valid')}};r.readAsText(f)}
-function switchTab(t){document.getElementById('owner').classList.toggle('hide',t!=='owner');document.getElementById('member').classList.toggle('hide',t!=='member');document.getElementById('ownTab').classList.toggle('active',t==='owner');document.getElementById('memTab').classList.toggle('active',t==='member')}
-function lookup(){let p=document.getElementById('lookupPhone').value.trim();let m=db.find(x=>x.phone===p);let out=document.getElementById('lookupResult');if(!p){out.innerHTML='Enter a member phone number to view membership details.';return}if(!m){out.innerHTML='No member found for this number.';return}out.innerHTML=`<div style="text-align:left"><h3>${esc(m.name)}</h3><p>Monthly fee: ₹${m.fee}</p><p>Expiry: ${fmt(m.expiry)}</p><p>Status: <span class="badge ${status(m)==='Active'?'':'expired'}">${status(m)}</span></p><p>Payments recorded: ${(m.payments||[]).length}</p></div>`}
-render();
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-</script></body></html>
+  <section id="authCard" class="card">
+    <h2>Login / Member Signup</h2>
+    <div class="notice">Owner apni registered gym email se login karein. Naye members yahin apna account bana sakte hain.</div>
+    <label>Email</label><input id="email" type="email" autocomplete="username" placeholder="name@example.com">
+    <label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password">
+    <div class="row">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn" class="secondary">Member Signup</button>
+    </div>
+    <p id="authMsg" class="small" aria-live="polite"></p>
+  </section>
+
+  <section id="profileCard" class="card hidden">
+    <div class="row"><div><h2 id="welcome">Welcome</h2><p id="userEmail" class="small"></p></div><div style="text-align:right"><button id="logoutBtn" class="secondary">Logout</button></div></div>
+    <div id="ownerPanel" class="hidden">
+      <h2>Owner Dashboard</h2>
+      <div class="grid">
+        <div class="member"><div class="small">Total members</div><div id="totalMembers" class="stat">0</div></div>
+        <div class="member"><div class="small">Active</div><div id="activeMembers" class="stat">0</div></div>
+        <div class="member"><div class="small">Due / expired</div><div id="dueMembers" class="stat">0</div></div>
+      </div>
+      <h3>Member records</h3>
+      <p class="small">Member ko pehle apne email se Member Signup karna hoga. Uske baad yahan uski fees set kar sakte ho.</p>
+      <div id="memberList"></div>
+    </div>
+    <div id="memberPanel" class="hidden">
+      <h2>My Membership</h2>
+      <div id="myDetails" class="notice">Loading your membership…</div>
+      <h3>Payment history</h3><div id="myPayments" class="small">No payment records yet.</div>
+    </div>
+  </section>
+  <section class="card">
+    <p class="small">Demo / MVP notice: Is app ko live gym records ke liye use karne se pehle security rules publish karke, test accounts se verify karein. UPI payments automatic verify nahi hote; owner ko bank/UPI app mein payment confirm karna hoga.</p>
+  </section>
+</main>
+<footer>Yug Fitness Gym • Firebase-connected starter</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCgOgh3aCSj5exovMzTrOX_Q9wQIld2AEE",
+  authDomain: "yug-fitness-gym.firebaseapp.com",
+  projectId: "yug-fitness-gym",
+  storageBucket: "yug-fitness-gym.firebasestorage.app",
+  messagingSenderId: "295461485643",
+  appId: "1:295461485643:web:7984bc8d2cba476fd961ce",
+  measurementId: "G-7LRHBQRXME"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+const show = (id, yes=true) => $(id).classList.toggle("hidden", !yes);
+const msg = (s, cls="") => { $("authMsg").textContent=s; $("authMsg").className=cls; };
+const today = () => new Date().toISOString().slice(0,10);
+const datePlusMonth = (dateStr) => { const d=new Date(dateStr+"T12:00:00"); d.setMonth(d.getMonth()+1); return d.toISOString().slice(0,10); };
+const money = n => "₹"+(Number(n||0)).toLocaleString("en-IN");
+let currentUser=null, isOwner=false;
+
+$("loginBtn").onclick = async () => {
+  try { msg("Logging in…"); await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value); msg(""); }
+  catch(e){ msg(friendly(e), "small error"); }
+};
+$("signupBtn").onclick = async () => {
+  const email=$("email").value.trim(), password=$("password").value;
+  if(password.length<6){msg("Password kam se kam 6 characters ka rakho.","small error");return;}
+  const name=prompt("Member ka poora naam:");
+  if(!name || !name.trim()){msg("Naam zaroori hai.","small error");return;}
+  const phone=prompt("Member ka mobile number (optional):")||"";
+  try {
+    msg("Member account bana rahe hain…");
+    const cred=await createUserWithEmailAndPassword(auth,email,password);
+    await setDoc(doc(db,"members",cred.user.uid),{
+      name:name.trim(), email, phone:phone.trim(), role:"member", createdAt:serverTimestamp()
+    });
+    msg("Signup complete! Ab owner aapki fees set karega.","small success");
+  } catch(e){msg(friendly(e),"small error");}
+};
+$("logoutBtn").onclick=()=>signOut(auth);
+
+function friendly(e){
+  const map={
+    "auth/invalid-credential":"Email ya password sahi nahi hai.",
+    "auth/email-already-in-use":"Is email se account pehle se bana hua hai.",
+    "auth/weak-password":"Password kam se kam 6 characters ka rakho.",
+    "auth/unauthorized-domain":"Firebase Authentication mein website domain authorize karna hoga.",
+    "permission-denied":"Database security rules ya account permission check karni hogi."
+  };
+  return map[e.code] || (e.message||"Kuch error aaya.").replace("Firebase: ","");
+}
+
+onAuthStateChanged(auth, async user=>{
+  currentUser=user;
+  if(!user){show("authCard",true);show("profileCard",false);return;}
+  show("authCard",false);show("profileCard",true);$("userEmail").textContent=user.email||"";
+  try {
+    const adminSnap=await getDoc(doc(db,"admins",user.uid));
+    isOwner=adminSnap.exists();
+    $("welcome").textContent=isOwner?"Owner Dashboard":"Member Dashboard";
+    show("ownerPanel",isOwner);show("memberPanel",!isOwner);
+    if(isOwner) await loadOwner();
+    else await loadMember();
+  } catch(e){$("welcome").textContent="Account access issue";$("myDetails").textContent=friendly(e);}
+});
+
+async function loadOwner(){
+  const snap=await getDocs(collection(db,"members"));
+  let active=0,due=0,html="";
+  const now=today();
+  snap.forEach(d=>{
+    const m=d.data(), expiry=m.expiryDate||"";
+    const status=expiry && expiry>=now ? "Active" : "Due / not set";
+    if(status==="Active")active++;else due++;
+    html+=`<div class="member">
+      <strong>${esc(m.name||"Member")}</strong> <span class="pill">${status}</span>
+      <p>${esc(m.email||"")} • ${esc(m.phone||"")}</p>
+      <p>Monthly fee: ${money(m.monthlyFee)} • Expiry: ${esc(expiry||"Not set")}</p>
+      <div class="grid">
+        <div><label>Monthly fee (₹)</label><input id="fee-${d.id}" type="number" min="0" value="${Number(m.monthlyFee||0)}"></div>
+        <div><label>Expiry date</label><input id="expiry-${d.id}" type="date" value="${esc(expiry)}"></div>
+      </div>
+      <button onclick="window.saveMember('${d.id}')">Save fee & expiry</button>
+      <button class="secondary" onclick="window.recordPayment('${d.id}')">Record payment</button>
+    </div>`;
+  });
+  $("totalMembers").textContent=snap.size;
+  $("activeMembers").textContent=active;
+  $("dueMembers").textContent=due;
+  $("memberList").innerHTML=html||'<p class="small">Abhi koi member signup nahi hua.</p>';
+}
+window.saveMember=async id=>{
+  try{
+    const fee=Number($("fee-"+id).value), expiry=$("expiry-"+id).value;
+    if(!Number.isFinite(fee)||fee<0||!expiry){alert("Valid fee aur expiry date bharo.");return;}
+    await updateDoc(doc(db,"members",id),{monthlyFee:fee,expiryDate:expiry,updatedAt:serverTimestamp()});
+    alert("Member fee aur expiry save ho gayi.");await loadOwner();
+  }catch(e){alert(friendly(e));}
+};
+window.recordPayment=async id=>{
+  try{
+    const fee=Number($("fee-"+id).value);
+    if(!Number.isFinite(fee)||fee<=0){alert("Pehle valid monthly fee bharo.");return;}
+    const currentExpiry=$("expiry-"+id).value||today();
+    const base=currentExpiry<today()?today():currentExpiry;
+    const next=datePlusMonth(base);
+    await updateDoc(doc(db,"members",id),{monthlyFee:fee,expiryDate:next,lastPaymentAt:serverTimestamp(),updatedAt:serverTimestamp()});
+    await addDoc(collection(db,"members",id,"payments"),{amount:fee,paidAt:serverTimestamp(),method:"Owner verified",newExpiryDate:next});
+    alert("Payment record save ho gaya. UPI/bank mein payment pehle verify karna zaroori hai.");
+    await loadOwner();
+  }catch(e){alert(friendly(e));}
+};
+async function loadMember(){
+  const ref=doc(db,"members",currentUser.uid), snap=await getDoc(ref);
+  if(!snap.exists()){$("myDetails").textContent="Member profile nahi mila. Gym owner se contact karein.";return;}
+  const m=snap.data();
+  $("myDetails").innerHTML=`<strong>${esc(m.name||"Member")}</strong><br>Monthly fee: ${money(m.monthlyFee)}<br>Expiry date: ${esc(m.expiryDate||"Not assigned")}<br>Status: ${m.expiryDate&&m.expiryDate>=today()?"Active":"Due / not set"}`;
+  const ps=await getDocs(query(collection(db,"members",currentUser.uid,"payments"),orderBy("paidAt","desc")));
+  $("myPayments").innerHTML=ps.empty?"No payment records yet.":ps.docs.map(p=>`<div class="member">${money(p.data().amount)} • ${esc(p.data().newExpiryDate||"")}<br><span class="small">Owner verified payment</span></div>`).join("");
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+</script>
+</body>
+</html>
