@@ -1,0 +1,11 @@
+{
+  "name": "Yug Fitness Gym",
+  "short_name": "Yug Fitness",
+  "description": "Gym membership and fee management",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101713",
+  "theme_color": "#101713",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
